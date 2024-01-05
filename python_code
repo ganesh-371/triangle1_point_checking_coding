@@ -1,0 +1,28 @@
+def checking_point(triangle, point):
+    x, y = point
+    x1, y1 = triangle[0]
+    x2, y2 = triangle[1]
+    x3, y3 = triangle[2]
+    d = (y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3)
+    alpha = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / d
+    beta = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / d
+    gamma = 1 - alpha - beta
+    if 0 <= alpha <= 1 and 0 <= beta <= 1 and 0 <= gamma <= 1:
+        return "Inside"
+    elif (
+        alpha == 0 and 0 <= beta <= 1 and 0 <= gamma <= 1
+    ) or (
+        beta == 0 and 0 <= alpha <= 1 and 0 <= gamma <= 1
+    ) or (
+        gamma == 0 and 0 <= alpha <= 1 and 0 <= beta <= 1
+    ):
+        return "On the periphera"
+    else:
+        return "Outside"
+triangle_vertices = [(0,0), (15,0), (0,12)]
+test_point_1 = (10,0 )
+test_point_2 = (100, 0)
+result_1= checking_point(triangle_vertices, test_point_1)
+result_2 = checking_point(triangle_vertices, test_point_2)
+print(f"The point {test_point_1} is {result_1} the triangle.")
+print(f"The point {test_point_2} is {result_2} the triangle.")
